@@ -9,20 +9,20 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
       actions.isEmpty == false && isOuterLifetimeEnded == false
     }
   }
-
+  
   let stateDidChange = PassthroughSubject<(State, Action?), Never>()
-
+  
   private let reducerLock = NSLock()
   private var state: State
   private var hasStarted = false
   private var cancelable: Cancellable?
-
+  
   private let queue = Atomic(QueueState())
   private let reducer: Reducer<State, Action>
   private let feedbacks: [Feedback<State, Action, Dependency>]
   private let subscriber: S
   private let dependency: Dependency
-
+  
   init(
     state: State,
     feedbacks: [Feedback<State, Action, Dependency>],
@@ -36,11 +36,11 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
     self.reducer = reducer
     self.dependency = dependency
   }
-
+  
   func bootstrap() {
     reducerLock.lock()
     defer { reducerLock.unlock() }
-
+    
     guard !hasStarted else { return }
     hasStarted = true
     self.cancelable = feedbacks.map {
@@ -50,9 +50,9 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
     stateDidChange.send((state, nil))
     drainActions()
   }
-
+  
   func request(_ demand: Subscribers.Demand) {}
-
+  
   func cancel() {
     stateDidChange.send(completion: .finished)
     cancelable?.cancel()
@@ -60,10 +60,10 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
       $0.isOuterLifetimeEnded = true
     }
   }
-
+  
   override func process(_ action: Action, for token: Token) {
     enqueue(action, for: token)
-
+    
     if reducerLock.try() {
       repeat {
         drainActions()
@@ -71,18 +71,18 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
       } while queue.withValue({ $0.hasActions }) && reducerLock.try()
     }
   }
-
+  
   override func dequeueAllActions(for token: Token) {
     queue.modify { $0.actions.removeAll(where: { _, t in t == token }) }
   }
-
+  
   private func enqueue(_ action: Action, for token: Token) {
     queue.modify { state -> QueueState in
       state.actions.append((action, token))
       return state
     }
   }
-
+  
   private func dequeue() -> Action? {
     queue.modify {
       guard !$0.isOuterLifetimeEnded, !$0.actions.isEmpty else {
@@ -91,13 +91,13 @@ final class Floodgate<State, Action, S: Subscriber, Dependency>: FeedbackActionC
       return $0.actions.removeFirst().0
     }
   }
-
+  
   private func drainActions() {
     while let next = dequeue() {
       consume(next)
     }
   }
-
+  
   private func consume(_ action: Action) {
     reducer(&state, action)
     _ = subscriber.receive(state)

@@ -3,10 +3,10 @@ import Combine
 
 public typealias SimpleFeedback<State, Action> = Feedback<State, Action, Void>
 
-//MARK: - Custom
+  //MARK: - Custom
 public extension Feedback where Dependency == Void {
-  /// compacting state
-  /// - Returns: Feedback
+    /// compacting state
+    /// - Returns: Feedback
   static func compacting<NewState, Effect: Publisher>(
     state transform: @escaping (AnyPublisher<State, Never>) -> AnyPublisher<NewState, Never>,
     effects: @escaping (NewState) -> Effect
@@ -16,8 +16,8 @@ public extension Feedback where Dependency == Void {
     }
   }
   
-  /// compacting action
-  /// - Returns: Feedback
+    /// compacting action
+    /// - Returns: Feedback
   static func compacting<NewAction, Effect: Publisher>(
     action transform: @escaping (AnyPublisher<Action, Never>) -> AnyPublisher<NewAction, Never>,
     effects: @escaping (NewAction) -> Effect
@@ -28,7 +28,7 @@ public extension Feedback where Dependency == Void {
   }
 }
 
-//MARK: - Middleware
+  //MARK: - Middleware
 public extension Feedback where Dependency == Void {
   static func middleware<Effect: Publisher>(
     _ effects: @escaping (State) -> Effect

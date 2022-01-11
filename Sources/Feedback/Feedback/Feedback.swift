@@ -17,7 +17,7 @@ public struct Feedback<State, Action, Dependency> {
   }
 }
 
-//MARK: - Custom
+  //MARK: - Custom
 public extension Feedback {
   static func custom( action: @escaping (
     _ state: AnyPublisher<(State, Action?), Never>,
@@ -29,10 +29,10 @@ public extension Feedback {
   }
 }
 
-//MARK: - Compacting
+  //MARK: - Compacting
 public extension Feedback {
-  /// compacting state
-  /// - Returns: Feedback
+    /// compacting state
+    /// - Returns: Feedback
   static func compacting<NewState, Effect: Publisher>(
     state transform: @escaping (AnyPublisher<State, Never>) -> AnyPublisher<NewState, Never>,
     effects: @escaping (NewState, Dependency) -> Effect
@@ -44,8 +44,8 @@ public extension Feedback {
     }
   }
   
-  /// compacting action
-  /// - Returns: Feedback
+    /// compacting action
+    /// - Returns: Feedback
   static func compacting<NewAction, Effect: Publisher>(
     action transform: @escaping (AnyPublisher<Action, Never>) -> AnyPublisher<NewAction, Never>,
     effects: @escaping (NewAction, Dependency) -> Effect
@@ -58,7 +58,7 @@ public extension Feedback {
   }
 }
 
-//MARK: - SkippingRepeated
+  //MARK: - SkippingRepeated
 public extension Feedback {
   static func skippingRepeated<Control: Equatable, Effect: Publisher>(
     state transform: @escaping (State) -> Control?,
@@ -97,7 +97,7 @@ public extension Feedback {
   
 }
 
-//MARK: - Predicate
+  //MARK: - Predicate
 public extension Feedback {
   static func predicate<Effect: Publisher>(
     predicate: @escaping (State) -> Bool,
@@ -122,10 +122,10 @@ public extension Feedback {
   
 }
 
-//MARK: - Lensing
+  //MARK: - Lensing
 public extension Feedback {
-  /// Lesing State
-  /// - Returns: Feedback
+    /// Lesing State
+    /// - Returns: Feedback
   static func lensing<Control, Effect: Publisher>(
     state transform: @escaping (State) -> Control?,
     effects: @escaping (Control, Dependency) -> Effect
@@ -156,8 +156,8 @@ public extension Feedback {
       }
     })
   }
-  /// Lensing Action
-  /// - Returns: Feedback
+    /// Lensing Action
+    /// - Returns: Feedback
   static func lensing<NewAction, Effect: Publisher>(
     action transform: @escaping (Action) -> NewAction?,
     effects: @escaping (NewAction, Dependency) -> Effect
@@ -191,7 +191,7 @@ public extension Feedback {
   
 }
 
-//MARK: - FirstValueAfterNil
+  //MARK: - FirstValueAfterNil
 public extension Feedback {
   static func firstValueAfterNil<Value, Effect: Publisher>(
     _ transform: @escaping (State) -> Value?,
@@ -243,7 +243,7 @@ public extension Feedback {
   }
 }
 
-//MARK: - Middleware
+  //MARK: - Middleware
 public extension Feedback {
   static func middleware<Effect: Publisher>(
     _ effects: @escaping (State, Dependency) -> Effect
@@ -305,11 +305,11 @@ public extension Feedback {
     _ effect: @escaping (Action, Dependency) async -> Action
   ) -> Feedback {
     custom { (state, output, dependency) -> Cancellable in
-      state.compactMap { _, e -> Action? in
-        guard let e = e else {
+      state.compactMap { _, action -> Action? in
+        guard let action = action else {
           return nil
         }
-        return e
+        return action
       }
       .flatMapLatest { action in
         TaskPublisher {
@@ -322,7 +322,7 @@ public extension Feedback {
   }
 }
 
-//MARK: - Pullback
+  //MARK: - Pullback
 public extension Feedback {
   func pullback<GlobalState, GlobalAction, GlobalDependency>(
     value: KeyPath<GlobalState, State>,
@@ -342,7 +342,7 @@ public extension Feedback {
   }
 }
 
-//MARK: - Combine
+  //MARK: - Combine
 public extension Feedback {
   static func combine (
     _ feedbacks: Feedback...
@@ -365,7 +365,13 @@ public extension Feedback {
   }
 }
 
-//MARK: - Input
+public extension Feedback {
+  init(@ArrayBuilder<Feedback<State, Action, Dependency>> builder: () -> [Feedback<State, Action, Dependency>]) {
+    self = Self.combine(builder())
+  }
+}
+
+  //MARK: - Input
 public extension Feedback {
   static var input: (feedback: Feedback, observer: (Action) -> Void) {
     let subject = PassthroughSubject<Action, Never>()

@@ -30,11 +30,11 @@
 		8743E9DC2710D98C00CB36A6 /* CounterFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743E9DB2710D98C00CB36A6 /* CounterFeedback.swift */; };
 		8743E9DE2710D99700CB36A6 /* AuthFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743E9DD2710D99700CB36A6 /* AuthFeedback.swift */; };
 		8782B761270B18ED0056CB94 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782B760270B18ED0056CB94 /* TodoModel.swift */; };
-		8782B767270B2F930056CB94 /* Json in Frameworks */ = {isa = PBXBuildFile; productRef = 8782B766270B2F930056CB94 /* Json */; };
-		8782B76A270B2FF90056CB94 /* ConvertSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8782B769270B2FF90056CB94 /* ConvertSwift */; };
-		878B2833270B3B5A006185E0 /* AnyRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 878B2832270B3B5A006185E0 /* AnyRequest */; };
 		878B2835270B3EDD006185E0 /* MainFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B2834270B3EDD006185E0 /* MainFeedback.swift */; };
 		878B2837270B3F18006185E0 /* RootFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B2836270B3F18006185E0 /* RootFeedback.swift */; };
+		8792BD8827A9CC9D0025EF7D /* CombineRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 8792BD8727A9CC9D0025EF7D /* CombineRequest */; };
+		8792BD8D27A9CCBF0025EF7D /* Json in Frameworks */ = {isa = PBXBuildFile; productRef = 8792BD8C27A9CCBF0025EF7D /* Json */; };
+		8792BD9027A9CCD20025EF7D /* ConvertSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8792BD8F27A9CCD20025EF7D /* ConvertSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,10 +70,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8792BD8827A9CC9D0025EF7D /* CombineRequest in Frameworks */,
 				87201D5D270A9EFD00FCE5DA /* Feedback in Frameworks */,
-				8782B76A270B2FF90056CB94 /* ConvertSwift in Frameworks */,
-				8782B767270B2F930056CB94 /* Json in Frameworks */,
-				878B2833270B3B5A006185E0 /* AnyRequest in Frameworks */,
+				8792BD9027A9CCD20025EF7D /* ConvertSwift in Frameworks */,
+				8792BD8D27A9CCBF0025EF7D /* Json in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,7 @@
 		87201D4C270A9EDF00FCE5DA /* Todo+Feedback+SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				87201D4D270A9EDF00FCE5DA /* TodoApp.swift */,
-				878AF967271117AE0066E71C /* TodoApp */,
+				8792BD9427A9D0390025EF7D /* CoreApp */,
 				87201D51270A9EE000FCE5DA /* Assets.xcassets */,
 				87201D53270A9EE000FCE5DA /* Preview Content */,
 			);
@@ -182,13 +181,30 @@
 		878AF967271117AE0066E71C /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				8792BD9527A9D0770025EF7D /* AppScreens */,
 				8782B75F270B18DB0056CB94 /* Models */,
-				87201D67270AA79100FCE5DA /* AuthScreen */,
-				87201D66270AA78900FCE5DA /* RootScreen */,
-				87201D65270AA77800FCE5DA /* MainScreen */,
-				87201D5E270AA64900FCE5DA /* CounterScreen */,
 			);
 			path = TodoApp;
+			sourceTree = "<group>";
+		};
+		8792BD9427A9D0390025EF7D /* CoreApp */ = {
+			isa = PBXGroup;
+			children = (
+				87201D4D270A9EDF00FCE5DA /* TodoApp.swift */,
+				878AF967271117AE0066E71C /* TodoApp */,
+			);
+			path = CoreApp;
+			sourceTree = "<group>";
+		};
+		8792BD9527A9D0770025EF7D /* AppScreens */ = {
+			isa = PBXGroup;
+			children = (
+				87201D66270AA78900FCE5DA /* RootScreen */,
+				87201D65270AA77800FCE5DA /* MainScreen */,
+				87201D67270AA79100FCE5DA /* AuthScreen */,
+				87201D5E270AA64900FCE5DA /* CounterScreen */,
+			);
+			path = AppScreens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,9 +225,9 @@
 			name = "Todo+Feedback+SwiftUI";
 			packageProductDependencies = (
 				87201D5C270A9EFD00FCE5DA /* Feedback */,
-				8782B766270B2F930056CB94 /* Json */,
-				8782B769270B2FF90056CB94 /* ConvertSwift */,
-				878B2832270B3B5A006185E0 /* AnyRequest */,
+				8792BD8727A9CC9D0025EF7D /* CombineRequest */,
+				8792BD8C27A9CCBF0025EF7D /* Json */,
+				8792BD8F27A9CCD20025EF7D /* ConvertSwift */,
 			);
 			productName = "Todo+Feedback+SwiftUI";
 			productReference = 87201D4A270A9EDF00FCE5DA /* Todo+Feedback+SwiftUI.app */;
@@ -242,9 +258,9 @@
 			);
 			mainGroup = 87201D41270A9EDF00FCE5DA;
 			packageReferences = (
-				8782B765270B2F930056CB94 /* XCRemoteSwiftPackageReference "Json" */,
-				8782B768270B2FF90056CB94 /* XCRemoteSwiftPackageReference "SwiftConvert" */,
-				878B2831270B3B5A006185E0 /* XCRemoteSwiftPackageReference "AnyRequest" */,
+				8792BD8627A9CC9D0025EF7D /* XCRemoteSwiftPackageReference "Networking" */,
+				8792BD8B27A9CCBF0025EF7D /* XCRemoteSwiftPackageReference "Json" */,
+				8792BD8E27A9CCD20025EF7D /* XCRemoteSwiftPackageReference "SwiftExtension" */,
 			);
 			productRefGroup = 87201D4B270A9EDF00FCE5DA /* Products */;
 			projectDirPath = "";
@@ -351,7 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -406,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -500,28 +516,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8782B765270B2F930056CB94 /* XCRemoteSwiftPackageReference "Json" */ = {
+		8792BD8627A9CC9D0025EF7D /* XCRemoteSwiftPackageReference "Networking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/FullStack-Swift/Networking";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+		8792BD8B27A9CCBF0025EF7D /* XCRemoteSwiftPackageReference "Json" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/FullStack-Swift/Json";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.0.0;
 			};
 		};
-		8782B768270B2FF90056CB94 /* XCRemoteSwiftPackageReference "SwiftConvert" */ = {
+		8792BD8E27A9CCD20025EF7D /* XCRemoteSwiftPackageReference "SwiftExtension" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/FullStack-Swift/SwiftConvert.git";
+			repositoryURL = "https://github.com/FullStack-Swift/SwiftExtension";
 			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		878B2831270B3B5A006185E0 /* XCRemoteSwiftPackageReference "AnyRequest" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/FullStack-Swift/AnyRequest";
-			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -531,20 +547,20 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Feedback;
 		};
-		8782B766270B2F930056CB94 /* Json */ = {
+		8792BD8727A9CC9D0025EF7D /* CombineRequest */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8782B765270B2F930056CB94 /* XCRemoteSwiftPackageReference "Json" */;
+			package = 8792BD8627A9CC9D0025EF7D /* XCRemoteSwiftPackageReference "Networking" */;
+			productName = CombineRequest;
+		};
+		8792BD8C27A9CCBF0025EF7D /* Json */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8792BD8B27A9CCBF0025EF7D /* XCRemoteSwiftPackageReference "Json" */;
 			productName = Json;
 		};
-		8782B769270B2FF90056CB94 /* ConvertSwift */ = {
+		8792BD8F27A9CCD20025EF7D /* ConvertSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8782B768270B2FF90056CB94 /* XCRemoteSwiftPackageReference "SwiftConvert" */;
+			package = 8792BD8E27A9CCD20025EF7D /* XCRemoteSwiftPackageReference "SwiftExtension" */;
 			productName = ConvertSwift;
-		};
-		878B2832270B3B5A006185E0 /* AnyRequest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 878B2831270B3B5A006185E0 /* XCRemoteSwiftPackageReference "AnyRequest" */;
-			productName = AnyRequest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

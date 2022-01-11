@@ -14,6 +14,6 @@ public extension Publishers {
       feedbacks: feedbacks,
       dependency: dependency
     )
-    .eraseToAnyPublisher()
+      .eraseToAnyPublisher()
   }
 }

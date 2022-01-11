@@ -12,12 +12,12 @@ public extension Publishers {
     public typealias Failure = Never
     private let upstream: Upstream
     private let consumer: FeedbackActionConsumer<Upstream.Output>
-
+    
     init(upstream: Upstream, consumer: FeedbackActionConsumer<Upstream.Output>) {
       self.upstream = upstream
       self.consumer = consumer
     }
-
+    
     public func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
       let token = Token()
       self.upstream.handleEvents(
@@ -28,10 +28,10 @@ public extension Publishers {
           self.consumer.dequeueAllActions(for: token)
         }
       )
-      .flatMap { _ -> Empty<Never, Never> in
-        Empty()
-      }
-      .receive(subscriber: subscriber)
+        .flatMap { _ -> Empty<Never, Never> in
+          Empty()
+        }
+        .receive(subscriber: subscriber)
     }
   }
 }
