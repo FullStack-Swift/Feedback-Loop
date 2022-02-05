@@ -4,6 +4,6 @@
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/FullStack-Swift/SwiftExtension", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/FullStack-Swift/Feedback-Loop", .upToNextMajor(from: "1.0.0"))
 ]
 ```
