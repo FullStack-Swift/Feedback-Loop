@@ -1,10 +1,6 @@
-# Feedback
-
-A description of this package.
-
 # Installation
 
-# Swift Package Manager
+## Swift Package Manager
 
 ```swift
 dependencies: [
